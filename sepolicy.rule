@@ -1,1 +1,2 @@
 allow audioserver default_android_service service_manager find
+allow priv_app default_android_service service_manager find
