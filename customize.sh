@@ -123,14 +123,6 @@ run_selinux_select_n_check(){
   fi
 }
 
-print_modname() {
-  ui_print "********************************"
-  ui_print "Audiohq - Advanced Audio Control"
-  ui_print "- Current version code 1        "
-  ui_print "- Current version Rev 0.91      "
-  ui_print "********************************"
-}
-
 print_warning() {
   ui_print "! Caution, If you have installed AudioHQ's Apk, this operation will override the apk data, pls do backup"
 }
@@ -160,15 +152,15 @@ ui_print "- Extracting module files"
 UNZIP_TARGET="apis/$API/$TO_INSTALL_ARCH/system"
 ui_print "- Target unzip $UNZIP_TARGET"
 
-unzip -oj "$ZIPFILE" 'common/*' -d $MODPATH >&2
+unzip -o "$ZIPFILE" "uninstall.sh" -d $MODPATH >&2
 unzip -o "$ZIPFILE" "$UNZIP_TARGET/*" -d $MODPATH >&2
 unzip -o "$ZIPFILE" "sepolicy.rule" -d $MODPATH >&2
 unzip -o "$ZIPFILE" "module.prop" -d $MODPATH >&2
 
 if [[ $CHECK_SE == 0 ]]; then
-  rm -f "$MODPATH/service_try_enforcing.sh"
+  unzip -o "$ZIPFILE" "service.sh" -d $MODPATH >&2
 else
-  rm -f "$MODPATH/service.sh"
+  unzip -o "$ZIPFILE" "service_try_enforcing.sh" -d $MODPATH >&2
   mv "$MODPATH/service_try_enforcing.sh" "$MODPATH/service.sh"
 fi
 
