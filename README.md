@@ -10,4 +10,4 @@ Flash it on MagiskManager
 [中文页面](https://alcatraz323.github.io/audiohq/index.html)
 
 #### More
-apk is published on GooglePlay And Coolapk
+The matched stable apk has been added to module file(will be mounted to /system/priv-app),apk is also published on GooglePlay And Coolapk
