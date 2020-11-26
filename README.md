@@ -4,6 +4,7 @@ Provide binary and apk for controlling each applications volume
 
 ## Installation
 Flash it on MagiskManager
+<font color="#FF000">DO NOT FLASH ON: Flyme,EMUI,GAME Phone system or any oem modified system(EXCEPT MIUI for now)</font>
 
 ## Pages
 [English Page](https://alcatraz323.github.io/audiohq/index_en.html)

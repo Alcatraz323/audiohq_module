@@ -4,6 +4,21 @@ API_SUPPORT_MIN=26
 
 TO_INSTALL_ARCH="arm"
 
+run_oem_syetem_warning(){
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!Installing and reboot on those system will cause soft brick"
+  ui_print "!!!Waiting for 10secs for you to exit"
+  sleep 10s
+}
+
 run_arch_check(){
   ui_print "- Current support arch : arm, arm64"
   ui_print "- Running Arch check"
@@ -141,6 +156,7 @@ set_permissions() {
   # set_perm  $MODPATH/system/lib/libart.so       0     0       0644
 }
 
+run_oem_syetem_warning
 print_warning
 run_api_check
 run_arch_check
