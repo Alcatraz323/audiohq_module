@@ -138,10 +138,6 @@ run_selinux_select_n_check(){
   fi
 }
 
-print_warning() {
-  ui_print "! Caution, If you have installed AudioHQ's Apk, this operation will override the apk data, pls do backup"
-}
-
 set_permissions() {
   ui_print "- Setting permissions"
   # The following is the default rule, DO NOT remove
@@ -157,7 +153,6 @@ set_permissions() {
 }
 
 run_oem_syetem_warning
-print_warning
 run_api_check
 run_arch_check
 run_magisk_check
@@ -183,9 +178,6 @@ fi
 
 mv "$MODPATH/$UNZIP_TARGET" "$MODPATH/"
 rm -rf "$MODPATH/apis"
-
-ui_print "- Extracting apk"
-unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
 ui_print "- File extraction complete"
 set_permissions
