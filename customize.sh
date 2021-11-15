@@ -1,8 +1,23 @@
 SKIPUNZIP=1
-API_SUPPORT_MAX=29
+API_SUPPORT_MAX=31
 API_SUPPORT_MIN=26
 
 TO_INSTALL_ARCH="arm"
+
+run_oem_syetem_warning(){
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!WARNING, Pls stop this installation or revert if you are"
+  ui_print "using oem modified system, such as sumsung's one ui, flyme, "
+  ui_print "emui...(EXCEPT MIUI for now)"
+  ui_print "!!!Installing and reboot on those system will cause soft brick"
+  ui_print "!!!Waiting for 10secs for you to exit"
+  sleep 10s
+}
 
 run_arch_check(){
   ui_print "- Current support arch : arm, arm64"
@@ -17,21 +32,21 @@ run_arch_check(){
   audioserver_info=$(file /system/bin/audioserver)
   ui_print "'audioserver' info : $audioserver_info"
 
-  filter="32"
+  filter="64-bit"
   result=$(echo $audioserver_info | grep "${filter}")
   if [[ "$result" != "" ]]; then
-    ui_print "- To install arch : arm"
-    TO_INSTALL_ARCH="arm"
-  else
     ui_print "- To install arch : arm64"
     TO_INSTALL_ARCH="arm64"
     if [[ $API == 26 || $API == 27 ]]; then
       abort "! Err : Your api isn't support this arch audiohq, contact developer for more information"
-   fi
+    fi
 
     if [[ $API == 28 ]]; then
       ui_print "! WARNING : This api may not fit arm64 arch, the software would not work probably, and your audiosystem may crash"
     fi
+  else
+    ui_print "- To install arch : arm"
+    TO_INSTALL_ARCH="arm"
   fi
 }
 
@@ -136,10 +151,12 @@ set_permissions() {
   set_perm_recursive  $MODPATH/system/lib         0     0       0644
   set_perm_recursive  $MODPATH/system/lib64       0     0       0644
   set_perm  $MODPATH/system/bin/audiohq   0     2000    0755      u:object_r:system_file:s0
+  set_perm  $MODPATH/system/bin/audiohqserver   0     2000    0755      u:object_r:system_file:s0
   # set_perm  $MODPATH/system/bin/dex2oat         0     2000    0755      u:object_r:dex2oat_exec:s0
   # set_perm  $MODPATH/system/lib/libart.so       0     0       0644
 }
 
+run_oem_syetem_warning
 print_warning
 run_api_check
 run_arch_check
@@ -166,9 +183,6 @@ fi
 
 mv "$MODPATH/$UNZIP_TARGET" "$MODPATH/"
 rm -rf "$MODPATH/apis"
-
-ui_print "- Extracting apk"
-unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
 ui_print "- File extraction complete"
 set_permissions
