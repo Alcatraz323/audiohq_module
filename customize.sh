@@ -1,5 +1,5 @@
 SKIPUNZIP=1
-API_SUPPORT_MAX=33
+API_SUPPORT_MAX=34
 API_SUPPORT_MIN=26
 
 TO_INSTALL_ARCH="arm"
@@ -41,7 +41,7 @@ run_arch_check(){
       abort "! Err : Your api isn't support this arch audiohq, contact developer for more information"
     fi
 
-    if [[ $API == 28 || $API == 32 || $API == 33 ]]; then
+    if [[ $API == 28 || $API == 32 || $API == 33 || $API == 34 ]]; then
       ui_print "! WARNING : This api may not fit arm64 arch, the software would not work probably, and your audiosystem may crash"
     fi
   else
